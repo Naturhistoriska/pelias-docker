@@ -1,0 +1,147 @@
+{
+  "logger": {
+    "level": "info",
+    "timestamp": false
+  },
+  "esclient": {
+    "apiVersion": "7.5",
+    "hosts": [{ "host": "elasticsearch" }]
+  },
+  "elasticsearch": {
+    "settings": {
+      "index": {
+        "refresh_interval": "10s",
+        "number_of_replicas": "0",
+        "number_of_shards": "3"
+      }
+    }
+  },
+  "acceptance-tests": {
+    "endpoints": {
+      "docker": "http://api:4000/v1/"
+    }
+  },
+  "api": {
+    "targets": {
+      "auto_discover": true
+    },
+    "customBoosts": {
+      "source": {
+        "gbif": 5,
+        "swe-virtual-herbarium": 5
+      }
+    },
+    "services": {
+      "pip": { "url": "http://pip:4200" },
+      "libpostal": { "url": "http://libpostal:4400" },
+      "placeholder": { "url": "http://placeholder:4100" },
+      "interpolation": { "url": "http://interpolation:4300" }
+    }
+  },
+  "imports": {
+    "adminLookup": {
+      "enabled": true
+    },
+    "csv": {
+      "datapath": "/data/csv",
+      "files": []
+    },
+    "geonames": {
+      "datapath": "/data/geonames",
+      "countryCode": "SE"
+    },
+    "openstreetmap": {
+      "download": [
+        {
+          "sourceURL": "http://download.geofabrik.de/europe/sweden-latest.osm.pbf"
+        },
+        {
+          "sourceURL": "http://download.geofabrik.de/europe/denmark-latest.osm.pbf"
+        },
+        {
+          "sourceURL": "http://download.geofabrik.de/europe/faroe-islands-latest.osm.pbf"
+        },
+        {
+          "sourceURL": "http://download.geofabrik.de/europe/finland-latest.osm.pbf"
+        },
+        {
+          "sourceURL": "http://download.geofabrik.de/europe/iceland-latest.osm.pbf"
+        },
+        {
+          "sourceURL": "http://download.geofabrik.de/europe/norway-latest.osm.pbf"
+        },
+        {
+          "sourceURL": "http://download.geofabrik.de/north-america/greenland-latest.osm.pbf"
+        }
+      ],
+      "leveldbpath": "/tmp",
+      "datapath": "/data/openstreetmap",
+      "import": [
+        {
+          "filename": "sweden-latest.osm.pbf"
+        },
+        {
+          "filename": "denmark-latest.osm.pbf"
+        },
+        {
+          "filename": "faroe-islands-latest.osm.pbf"
+        },
+        {
+          "filename": "finland-latest.osm.pbf"
+        },
+        {
+          "filename": "iceland-latest.osm.pbf"
+        },
+        {
+          "filename": "norway-latest.osm.pbf"
+        },
+        {
+          "filename": "greenland-latest.osm.pbf"
+        }
+      ]
+    },
+    "openaddresses": {
+      "datapath": "/data/openaddresses",
+      "files": [
+        "se/municipality_of_alingsas.csv",
+        "se/municipality_of_gislaved.csv",
+        "se/municipality_of_helsingborg.csv",
+        "se/municipality_of_hoganas.csv",
+        "se/municipality_of_kalmar.csv",
+        "se/municipality_of_kristinehamn.csv",
+        "se/municipality_of_malmo.csv",
+        "se/municipality_of_nacka.csv",
+        "se/municipality_of_savsjö.csv",
+        "se/municipality_of_stockholm.csv",
+        "se/municipality_of_uppsala.csv",
+        "se/municipality_of_vasteras.csv",
+        "se/municipality_of_vaxholm.csv",
+        "se/municipality_of_Österåker.csv",
+        "no/countrywide.csv",
+        "fi/countrywide-fi.csv",
+        "fi/countrywide-sv.csv",
+        "fo/countrywide.csv",
+        "dk/countrywide.csv",
+        "is/countrywide.csv"
+      ]
+    },
+    "polyline": {
+      "datapath": "/data/polylines",
+      "files": ["extract.0sv"]
+    },
+    "whosonfirst": {
+      "datapath": "/data/whosonfirst",
+      "importPostalcodes": true,
+      "countryCode": ["DK", "FI", "IS", "NO", "SE", "GL", "FO"],
+      "importPlace": [
+        "85633121",
+        "85633143",
+        "85633249",
+        "85633341",
+        "85633789",
+        "85633217",
+        "85633153"
+      ]
+    }
+  }
+}
